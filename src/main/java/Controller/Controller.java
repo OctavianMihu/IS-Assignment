@@ -12,18 +12,22 @@ public class Controller {
     private CityBreak cityBreak;
     private LogIn logIn;
     private Sejur sejur;
+    private Faimoase faimoase;
     private SixButtons sixButtons;
     private Summer summer;
     private Winter winter;
+    private Romania romania;
 
 
     public Controller() {
         cityBreak = new CityBreak();
         logIn = new LogIn();
         sejur = new Sejur();
+        faimoase = new Faimoase();
         sixButtons = new SixButtons();
         summer = new Summer();
         winter = new Winter();
+        romania = new Romania();
 
         logIn.logInButtonAddActionListener(new ActionListener() {
             @Override
@@ -33,11 +37,41 @@ public class Controller {
             }
         });
 
+        sejur.addBackButtonActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sejur.getFrame().setVisible(false);
+                sixButtons.getFrame().setVisible(true);
+            }
+        });
+        sejur.addSearchButtonActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                    JOptionPane.showMessageDialog(new JPanel(), "Zboruri gasite in specificatiile respective");
+            }
+        });
+
+        sixButtons.addRomaniaButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sixButtons.getFrame().setVisible(false);
+                romania.getFrame().setVisible(true);
+            }
+        });
+
+        sixButtons.addBackButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sixButtons.getFrame().dispose();
+                logIn.setVisible(true);
+            }
+        });
+
         sixButtons.addSejurButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 sixButtons.getFrame().setVisible(false);
-                sejur.setVisible(true);
+                sejur.getFrame().setVisible(true);
             }
         });
         sixButtons.addCityBreakButtonListener(new ActionListener() {
@@ -47,20 +81,23 @@ public class Controller {
                 cityBreak.getFrame().setVisible(true);
             }
         });
+
+
         sixButtons.addSummerButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 sixButtons.getFrame().setVisible(false);
-                summer.setVisible(true);
+                summer.getFrame().setVisible(true);
             }
         });
         sixButtons.addWinterButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                sixButtons.getFrame().setVisible(false);
-                winter.setVisible(true);
+               sixButtons.getFrame().setVisible(false);
+                winter.getFrame().setVisible(true);
             }
         });
+
         sixButtons.addRomaniaButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -70,7 +107,8 @@ public class Controller {
         sixButtons.addFaimoaseButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(new JPanel(), "Informatii despre vacante in locuri faimoase");
+                sixButtons.getFrame().setVisible(false);
+                faimoase.getFrame().setVisible(true);
             }
         });
         cityBreak.addSearchButtonListener(new ActionListener() {
@@ -79,6 +117,39 @@ public class Controller {
                 JOptionPane.showMessageDialog(new JPanel(), "Zboruri gasite in specificatiile respective");
             }
         });
+
+        cityBreak.addBackButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cityBreak.getFrame().dispose();
+                sixButtons.getFrame().setVisible(true);
+            }
+        });
+        winter.addBackButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                winter.getFrame().dispose();
+                sixButtons.getFrame().setVisible(true);
+            }
+        });
+
+        summer.addBackButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                summer.getFrame().dispose();
+                sixButtons.getFrame().setVisible(true);
+            }
+        });
+
+        faimoase.addBackButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                faimoase.getFrame().dispose();
+                sixButtons.getFrame().setVisible(true);
+            }
+        });
+
+
     }
     /*private class CityButtonListener implements ActionListener {
         @Override

@@ -9,12 +9,15 @@ import java.util.Map;
 
 public class Summer extends JFrame {
     private Map<String, Summer.CityInfo> cityInfoMap;
+    private JButton  backButton;
+    private JFrame  frame;
 
     public Summer() {
-        setTitle("Summer Cities App");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1000, 600);
-        setLocationRelativeTo(null);
+        frame = new JFrame("Summer Cities");
+        frame.setTitle("Summer Cities App");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(1000, 600);
+        frame.setLocationRelativeTo(null);
 
         initCityInfo();
 
@@ -23,10 +26,15 @@ public class Summer extends JFrame {
         JLabel label = new JLabel("Summer Cities", SwingConstants.CENTER);
         label.setFont(new Font("Arial", Font.BOLD, 18));
         mainPanel.add(label, BorderLayout.PAGE_START);
-        mainPanel.setBackground(Color.YELLOW);
+        mainPanel.setBackground(Color.pink);
 
         JPanel buttonPanel = new JPanel(new GridLayout(2, 2, 10, 10));
-        buttonPanel.setBackground(Color.yellow);
+        buttonPanel.setBackground(Color.pink);
+
+        backButton = new JButton("Back");
+        backButton.setFont(new Font("Arial", Font.BOLD, 16));
+        backButton.setBackground(Color.pink);
+        mainPanel.add(backButton, BorderLayout.PAGE_END);
 
 
         createCityButton("Greece", buttonPanel);
@@ -36,26 +44,27 @@ public class Summer extends JFrame {
 
         mainPanel.add(buttonPanel, BorderLayout.CENTER);
 
-        add(mainPanel);
+        frame.add(mainPanel);
 
-        setVisible(false);
+        frame.setVisible(false);
     }
 
     private void initCityInfo() {
         cityInfoMap = new HashMap<>();
-        cityInfoMap.put("Greece", new Summer.CityInfo("Greece.jpg", "Beautiful country known for summer resorts."));
-        cityInfoMap.put("Italy", new Summer.CityInfo("Italy.jpg", "A picturesque coastline with charming villages, beautiful beaches, and delicious Italian cuisine."));
-        cityInfoMap.put("Indonesia", new Summer.CityInfo("Indonesia.jpg", "A tropical paradise with lush landscapes, beautiful beaches, and diverse outdoor activities."));
-        cityInfoMap.put("Maldives", new Summer.CityInfo("Maldives.jpg", "A tropical paradise with overwater bungalows, clear turquoise waters, and vibrant coral reefs."));
+        cityInfoMap.put("Greece", new Summer.CityInfo("Greece.jpg", "Beautiful country known for summer resorts. <br> Our offer : <br> * 5 Nights <br> * 3 star Resort <br> * Free scuba diving lessons <br> * Total cost : 2000$"));
+        cityInfoMap.put("Italy", new Summer.CityInfo("Italy.jpg", "A picturesque coastline with charming villages, beautiful beaches, and delicious Italian cuisine. <br> Our offer : <br> * 3 Nights  <br> * Free diving lessons <br> * Boat trips included <br> * Total cost : 3200$"));
+        cityInfoMap.put("Indonesia", new Summer.CityInfo("Indonesia.jpg", "A tropical paradise with lush landscapes, beautiful beaches, and diverse outdoor activities. <br> Our offer : <br> * 5 Nights  <br> * Free trips at local temples <br> * 3 star Hotel <br> * Total cost : 1200$"));
+        cityInfoMap.put("Maldives", new Summer.CityInfo("Maldives.jpg", "A tropical paradise with overwater bungalows, clear turquoise waters, and vibrant coral reefs. <br> Our offer : <br> * 2 Nights <br> * Free boat trips  <br> * Jet-skying around the island <br> * Individual bungalow <br> * Total cost : 1500$"));
     }
 
     private void createCityButton(String cityName, JPanel buttonPanel) {
         JButton button = new JButton(cityName);
+        button.setFont(new Font("Arial", Font.BOLD, 20));
+        button.setBackground(new Color(225, 195, 220));
+        button.setForeground(Color.white);
         button.addActionListener(new Summer.CityButtonListener());
         buttonPanel.add(button);
-        Font buttonFont = button.getFont();
-        Font boldFont = new Font(buttonFont.getName(), Font.BOLD, buttonFont.getSize() + 2);
-        button.setFont(boldFont);
+
     }
 
     private class CityButtonListener implements ActionListener {
@@ -94,16 +103,24 @@ public class Summer extends JFrame {
             return info;
         }
     }
+
+    public JFrame getFrame() {
+        return frame;
+    }
+
+    public void addBackButtonListener(ActionListener actionListener) {
+        backButton.addActionListener(actionListener);
+    }
 }
 
 class CityDetailsS extends JFrame {
 
-    private static final int IMAGE_WIDTH = 800;
-    private static final int IMAGE_HEIGHT = 500;
+    private static final int IMAGE_WIDTH = 1000;
+    private static final int IMAGE_HEIGHT = 600;
 
     public CityDetailsS(Summer.CityInfo cityInfo) {
         setTitle("City Details - " + cityInfo.getImagePath());
-        setSize(800, 500);
+        setSize(900, 600);
         setLocationRelativeTo(null);
 
         JPanel mainPanel = new JPanel(new BorderLayout());
@@ -119,7 +136,7 @@ class CityDetailsS extends JFrame {
         JLabel label = new JLabel("Information", SwingConstants.CENTER);
         label.setFont(new Font("Arial", Font.BOLD, 18));
         mainPanel.add(label, BorderLayout.PAGE_START);
-        mainPanel.setBackground(Color.yellow);
+        mainPanel.setBackground(Color.pink);
 
 
         JEditorPane infoEditorPane = new JEditorPane();

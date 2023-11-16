@@ -32,6 +32,8 @@ public class CityBreak extends JFrame{
     JTextField returnDateTextField;
 
     JPanel passengerPanel;
+
+    JPanel panelback;
     JPanel adultPanel;
     JPanel childPanel;
     JPanel infantPanel;
@@ -44,6 +46,7 @@ public class CityBreak extends JFrame{
     JComboBox<Integer> infantComboBox;
 
     JButton searchButton;
+    JButton backButton;
 
     public CityBreak(){
         frame = new JFrame("Flight Search");
@@ -52,7 +55,7 @@ public class CityBreak extends JFrame{
         // Create the main panel
         panel = new JPanel();
         panel.setPreferredSize(new Dimension(600, 500));
-        panel.setLayout(new GridLayout(4, 1, 10, 0));
+        panel.setLayout(new GridLayout(5, 1, 10, 0));
 
         // Create the one-way/two-way flight radio buttons
         ButtonPanel = new JPanel();
@@ -109,6 +112,7 @@ public class CityBreak extends JFrame{
         returnDatePanel.add(returnDateLabel);
         returnDatePanel.add(returnDateTextField);
         datePanel.add(returnDatePanel);
+        //datePanel.setBackground(Color.BLUE);
 
         adultPanel = new JPanel();
         childPanel = new JPanel();
@@ -116,9 +120,9 @@ public class CityBreak extends JFrame{
         Integer[] adults = {1,2,3,4,5,6,7,8,9};
         Integer[] children = {1,2,3,4,5,6};
         Integer[] infants = {1,2,3,4};
-        adultComboBox = new JComboBox<>(adults);
-        childComboBox = new JComboBox<>(children);
-        infantComboBox = new JComboBox<>(infants);
+        adultComboBox = new JComboBox<Integer>(adults);
+        childComboBox = new JComboBox<Integer>(children);
+        infantComboBox = new JComboBox<Integer>(infants);
         adultLabel = new JLabel("Adults:");
         childLabel = new JLabel("Children:");
         infantLabel = new JLabel("Infants:");
@@ -140,7 +144,17 @@ public class CityBreak extends JFrame{
         passengerPanel.add(searchButton);
         panel.add(datePanel);
         panel.add(passengerPanel);
+
+        panelback = new JPanel();
+        backButton = new JButton("Back");
+        panelback.add(backButton);
+        panel.add(panelback);
+        frame.add(panel);
+
+
+
         // Add the panel to the frame
+        //panel.setBackground(Color.BLUE);
         frame.getContentPane().add(panel);
 
         // Size and display the frame
@@ -150,6 +164,9 @@ public class CityBreak extends JFrame{
 
     public void addSearchButtonListener(ActionListener actionListener) {
         searchButton.addActionListener(actionListener);
+    }
+    public void addBackButtonListener(ActionListener actionListener) {
+        backButton.addActionListener(actionListener);
     }
     public JFrame getFrame() {
         return frame;

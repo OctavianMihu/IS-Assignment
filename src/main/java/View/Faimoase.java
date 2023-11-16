@@ -1,5 +1,4 @@
 package View;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,78 +6,69 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Winter extends JFrame {
+public class Faimoase extends JFrame {
     private JFrame frame;
     private JButton backButton;
-    private SixButtons sixButtons;
-    private Winter w;
+
     private Map<String, CityInfo> cityInfoMap;
 
-    public Winter() {
-
+    public Faimoase() {
         frame = new JFrame("Winter Cities");
-        frame.setTitle("Winter Cities App");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(1000, 600);
         frame.setLocationRelativeTo(null);
+
 
         initCityInfo();
 
         JPanel mainPanel = new JPanel(new BorderLayout());
 
-        JLabel label = new JLabel("Winter Cities", SwingConstants.CENTER);
-        label.setFont(new Font("Arial", Font.BOLD, 32));
+        JLabel label = new JLabel("Locatii faimoase", SwingConstants.CENTER);
+        label.setFont(new Font("Arial", Font.BOLD, 18));
         mainPanel.add(label, BorderLayout.PAGE_START);
-        mainPanel.setBackground(Color.cyan);
+        mainPanel.setBackground(Color.magenta);
 
-        JPanel buttonPanel = new JPanel(new GridLayout(2, 2, 10, 10));
-        buttonPanel.setBackground(Color.cyan);
+        JPanel buttonPanel = new JPanel(new GridLayout(2, 3, 10, 10));
+        buttonPanel.setBackground(Color.magenta);
 
         backButton = new JButton("Back");
         backButton.setFont(new Font("Arial", Font.BOLD, 16));
-        backButton.setBackground(Color.cyan);
+        backButton.setBackground(Color.magenta);
         mainPanel.add(backButton, BorderLayout.PAGE_END);
 
+        String[] cities = {"Paris", "Rome", "New York", "Tokyo", "Barcelona", "Sydney"};
 
-        createCityButton("Austria", buttonPanel);
-        createCityButton("Switzerland", buttonPanel);
-        createCityButton("Canada", buttonPanel);
-        createCityButton("Norway", buttonPanel);
+        for (String city : cities) {
+            JButton button = new JButton(city);
+            button.setFont(new Font("Arial", Font.BOLD, 20));
+            button.setBackground(new Color(250, 200, 200));
+            button.setForeground(Color.magenta);
+            button.addActionListener(new CityButtonListener());
+            buttonPanel.add(button);
+        }
 
         mainPanel.add(buttonPanel, BorderLayout.CENTER);
 
         frame.add(mainPanel);
 
         frame.setVisible(false);
-
-    }
-    public void addBackButtonListener(ActionListener actionListener) {
-        backButton.addActionListener(actionListener);
     }
 
-   /* private void addActionListenerToBackButton() {
+    /*private void addActionListenerToBackButton() {
         backButton.addActionListener(e -> {
-            sixButtons.getFrame().setVisible(true);
             frame.dispose();
-            frame.setVisible(false);
         });
     }*/
 
     private void initCityInfo() {
         cityInfoMap = new HashMap<>();
-        cityInfoMap.put("Austria", new CityInfo("Austria.jpg", "Beautiful country known for winter resorts. <br> Our offer : <br> * 3 Nights <br> * 2 star Hotel <br> * Sky pass for all day <br> Total cost : 800$ "));
-        cityInfoMap.put("Switzerland", new CityInfo("Switzerland.jpg", "Scenic country famous for its ski resorts and landscapes. <br> * All inclusive <br> * 4 Nights <br> * 5 star Hotel <br> * Spa and Pool pass included <br> Total cost : 6900$"));
-        cityInfoMap.put("Canada", new CityInfo("Canada.jpg", "Winter wonderland with stunning natural beauty. <br> Our offer : <br> * 5 Nights <br> * 3 star Hotel <br> * Tour of the shy slopes <br> * Total cost : 3000$"));
-        cityInfoMap.put("Norway", new CityInfo("Norway.jpg", "Picturesque country with snowy landscapes and northern lights. <br> Our offer : <br> * 5 Nights <br> * Alone cabin <br> * Guided walk on the nights with Aurora borealis <br> * Total cost : 4500$ "));
-    }
-
-    private void createCityButton(String cityName, JPanel buttonPanel) {
-        JButton button = new JButton(cityName);
-        button.setFont(new Font("Arial", Font.BOLD, 20));
-        button.setBackground(new Color(0, 150, 255));
-        button.setForeground(Color.white);
-        button.addActionListener(new CityButtonListener());
-        buttonPanel.add(button);
+        cityInfoMap = new HashMap<>();
+        cityInfoMap.put("Paris", new CityInfo("Paris.jpg", "Beautiful city known for the Eiffel Tower.<br> Our offer: <br> * 4 Nights <br> * 2 Persons * All inclusive <br> * 4 star Hotel <br> * Total cost : 2500$"));
+        cityInfoMap.put("Rome", new CityInfo("Rome.jpg", "Historic city with iconic landmarks like the Colosseum.<br> Our offer : <br> * 7 Nights <br> * Family of 4/5 <br> * 3 star Hotel <br> * Breakfast included <br> * Free tour of the city <br> *Total cost : 5000$ "));
+        cityInfoMap.put("New York", new CityInfo("NewY.jpg", "The city that never sleeps, famous for its skyline. <br> Our offer : <br> * 4 Nights <br> * Close to the city center <br> * All inclusive <br> * Free tour of the Statue of liberty <br> * 5 star Hotel <br> Total cost : 7000$ "));
+        cityInfoMap.put("Tokyo", new CityInfo("Tokyo.jpg", "Modern metropolis with a mix of traditional and futuristic elements. <br> Our offer: <br>  * All inclusive <br> * 5 Nights <br> * 2 Adults <br> * City tour with a guide <br> * 2 star Hotel <br> * Total cost : 6000$ "));
+        cityInfoMap.put("Barcelona", new CityInfo("Barcelona.jpg", "Vibrant city known for its architecture and art. <br> Our offer : <br> * Family Pack <br> * 2 star Hotel <br> * 6 Nights <br> * Breakfast included <br> * Total cost : 900$"));
+        cityInfoMap.put("Sydney", new CityInfo("Sydney.jpg", "Iconic city with landmarks like the Sydney Opera House. <br> Our offer : <br> * All inclusive <br> * 4 Nights <br> * 3 star Hotel close to the Opera <br> * Total cost :  1500$"));
     }
 
     private class CityButtonListener implements ActionListener {
@@ -89,20 +79,20 @@ public class Winter extends JFrame {
 
             CityInfo cityInfo = cityInfoMap.get(cityName);
             if (cityInfo != null) {
-                new CityDetailsW(cityInfo).setVisible(true);
+                new CityDetails(cityInfo).setVisible(true);
             } else {
-                JOptionPane.showMessageDialog(Winter.this, "City information not available.");
+                JOptionPane.showMessageDialog(Faimoase.this, "City information not available.");
             }
         }
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new Winter());
+        SwingUtilities.invokeLater(() -> new Faimoase());
     }
 
     public static class CityInfo {
         private String imagePath;
-        public String info; // Make info public
+        public String info;
 
         public CityInfo(String imagePath, String info) {
             this.imagePath = imagePath;
@@ -120,19 +110,28 @@ public class Winter extends JFrame {
     public JFrame getFrame() {
         return frame;
     }
+
+    public void addBackButtonListener(ActionListener actionListener) {
+        backButton.addActionListener(actionListener);
+    }
 }
 
-class CityDetailsW extends JFrame {
-
+class CityDetails extends JFrame {
     private static final int IMAGE_WIDTH = 1000;
     private static final int IMAGE_HEIGHT = 600;
 
-    public CityDetailsW(Winter.CityInfo cityInfo) {
+    public CityDetails(Faimoase.CityInfo cityInfo) {
+
         setTitle("City Details - " + cityInfo.getImagePath());
-        setSize(1000, 600);
+        setSize(800, 500);
         setLocationRelativeTo(null);
 
         JPanel mainPanel = new JPanel(new BorderLayout());
+
+        JLabel label = new JLabel("Information", SwingConstants.CENTER);
+        label.setFont(new Font("Arial", Font.BOLD, 18));
+        mainPanel.add(label, BorderLayout.PAGE_START);
+        mainPanel.setBackground(Color.magenta);
 
         JPanel contentPanel = new JPanel(new BorderLayout());
 
@@ -141,12 +140,6 @@ class CityDetailsW extends JFrame {
         ImageIcon scaledImageIcon = new ImageIcon(image);
         JLabel imageLabel = new JLabel(scaledImageIcon);
         contentPanel.add(imageLabel, BorderLayout.CENTER);
-
-        JLabel label = new JLabel("Information", SwingConstants.CENTER);
-        label.setFont(new Font("Arial", Font.BOLD, 18));
-        mainPanel.add(label, BorderLayout.PAGE_START);
-        mainPanel.setBackground(Color.cyan);
-
 
         JEditorPane infoEditorPane = new JEditorPane();
         infoEditorPane.setContentType("text/html"); // Set content type to HTML
@@ -162,7 +155,7 @@ class CityDetailsW extends JFrame {
         });
         mainPanel.add(purchaseButton, BorderLayout.PAGE_END);
 
-        mainPanel.add(contentPanel, BorderLayout.CENTER);
+                mainPanel.add(contentPanel, BorderLayout.CENTER);
 
         add(mainPanel);
     }
